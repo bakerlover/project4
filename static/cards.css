@@ -1,0 +1,78 @@
+body {
+  background: white; 
+  margin:0px;  
+}
+.card {
+  -webkit-perspective: 800;
+   width: 100px;
+   height: 130px;
+    position: relative;
+    margin: 3px;
+    float:left;
+  -webkit-box-shadow: 3px 0px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    3px 0px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         3px 0px 5px 0px rgba(50, 50, 50, 0.75);
+}
+.card .faces.flipped {
+  -webkit-transform: rotatey(-180deg);
+}
+.card .faces {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+.card .faces .face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden ;
+  z-index: 2;
+  font-family: Georgia;
+  font-size: 3em;
+  text-align: center;
+  line-height: 200px;
+}
+.card .faces .front {
+  background-image: url("http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg");
+  background-size:100%;
+  position: absolute;
+  z-index: 1;
+    color: white;
+    cursor: pointer;
+}
+.card .faces .back{
+  -webkit-transform: rotatey(-180deg);
+    
+  
+  background-color:white;
+    color: black;
+    cursor: pointer;
+  border:1px solid black;
+}
+
+#player-id{
+  display:none;
+}
+#game{
+  
+ width: 100%;
+height: 100%; 
+}
+#game-players .player{
+  width:30%;
+  border: 1px solid rgb(202, 202, 202);
+}
+.board{
+  width: 88%;
+height: 100%;
+margin: auto;
+background-color: white;
+text-align: center;
+overflow: hidden;
+padding: 15px;
+padding-left: 9%;
+}
+#game-controls{
+  padding: 15px;
+}

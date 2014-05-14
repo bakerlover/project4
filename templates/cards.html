@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <title> My Memory Card Game </title>
+      <link href="/static/cards.css" type="text/css" rel="stylesheet" />
+      <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+      <link href="/static/site.css" type="text/css" rel="stylesheet" />
+      <link href="/static/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+      <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+      <script src="/static/jquery-1.11.0.min.js"></script>
+      <script src="/static/bootstrap.min.js "></script>
+      <script src="/static/cards.js"></script>
+      <script src="/static/site.js"></script>
+      
+    </head>
+    <body >
+    	<input type="text" hidden='true' value="{{ player_id }}" id="player-id">
+    	<header>
+    		<span id="site-name" class="selected">Memory Game</span>
+    	</header>
+    	<div id="site-content" >
+    		<div id="side-bar" class="site-panel">
+    			<div id="leader-board">
+            <div class="side-bar-title">
+              Players
+            </div>
+            <div id="leaders">
+              {% for player in players %}
+              <span class="player available" id="{{player.name}}" >
+                  <img src="/static/player3.jpg" class="picture"> 
+                <span class="username">{{player.name}}</span>
+                <span class="score">{{player.score}}</span>
+                {% if player.rank %}
+                  <span class="rank">{{player.rank}}</span>
+                {% endif %}
+                </span>
+              {% endfor %}
+
+            </div>
+            <div >
+            </div>
+    			</div>
+    			<div id="network-players">
+    			</div>
+    		</div>
+    		<div id="game-area" class="site-panel">
+    		</div>
+    	</div>
+        <script>
+        	channel = new goog.appengine.Channel('{{ token }}');
+  		    socket = channel.open();
+  		    socket.onopen = onOpened;
+  		    socket.onmessage = onMessage;
+  		    socket.onerror = onError;
+  		    socket.onclose = onClose;
+      </script>
+  <div id="game-request" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Game Request</h4>
+      </div>
+      <div class="modal-body">
+        <span class="username"></span> I want to play!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="reject-request">Reject Request</button>
+        <button type="button" class="btn btn-success" id="accept-request" data-dismiss="modal">AcceptRequest</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+      <div id="game-request-rejected" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Game Request</h4>
+      </div>
+      <div class="modal-body">
+        <span class="username"></span> is Busy.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+      <div id="game-request-accepted" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Gamer's Request</h4>
+      </div>
+      <div class="modal-body">
+        <span class="username"></span> I need to play also
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>
